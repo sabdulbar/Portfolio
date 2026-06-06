@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syed Abdul Bar — Digital Marketer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080A0F;
+    --surface: #0E1117;
+    --card: #121620;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.15);
+    --accent: #00E5FF;
+    --accent2: #7B61FF;
+    --accent3: #FF6B6B;
+    --text: #F0F2F5;
+    --muted: #7A8394;
+    --muted2: #4A5568;
+    --green: #00D68F;
+    --amber: #FFB547;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(8,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 18px;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+    color: var(--muted); text-decoration: none;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    font-size: 13px; font-weight: 500;
+    padding: 9px 22px; border-radius: 6px;
+    background: var(--accent); color: #080A0F;
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: opacity .2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid-overlay {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+  }
+  .hero-glow {
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute; bottom: -100px; left: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,97,255,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 960px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 20px;
+    border: 1px solid rgba(0,229,255,0.3);
+    background: rgba(0,229,255,0.06);
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeUp .6s ease forwards;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: clamp(52px, 7vw, 96px);
+    line-height: 1; letter-spacing: -3px;
+    margin-bottom: 24px;
+    animation: fadeUp .7s .1s ease both;
+  }
+  .hero h1 .name-line { display: block; }
+  .hero h1 .accent-line {
+    display: block;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 18px; font-weight: 300; color: var(--muted);
+    max-width: 560px; line-height: 1.7; margin-bottom: 48px;
+    animation: fadeUp .7s .2s ease both;
+  }
+  .hero-stats {
+    display: flex; gap: 48px; margin-bottom: 48px;
+    animation: fadeUp .7s .3s ease both;
+  }
+  .hero-stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px; font-weight: 800; letter-spacing: -1px;
+    color: var(--text);
+  }
+  .hero-stat-num span { color: var(--accent); }
+  .hero-stat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .hero-actions {
+    display: flex; gap: 16px;
+    animation: fadeUp .7s .4s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px; border-radius: 8px;
+    background: var(--accent); color: #080A0F;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,229,255,0.25); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px; border-radius: 8px;
+    border: 1px solid var(--border-hover); color: var(--text);
+    font-size: 14px; font-weight: 500; text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 48px; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -1.5px; line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .section-desc {
+    font-size: 16px; font-weight: 300; color: var(--muted);
+    max-width: 520px; line-height: 1.7; margin-bottom: 64px;
+  }
+
+  /* ABOUT */
+  .about-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center; max-width: 1100px; margin: 0 auto;
+  }
+  .about-avatar-wrap {
+    position: relative;
+  }
+  .about-avatar {
+    width: 100%; aspect-ratio: 1;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #0E1117 0%, #1A2035 100%);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 100px; font-weight: 800;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(135deg, var(--accent), var(--accent2));
+    position: relative; overflow: hidden;
+    max-width: 360px;
+  }
+  .about-avatar::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(123,97,255,0.08));
+    border-radius: 24px;
+  }
+  .about-tag {
+    position: absolute; bottom: -16px; right: -16px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px 18px;
+    font-size: 13px;
+  }
+  .about-tag strong { color: var(--accent); font-size: 22px; font-family: 'Syne', sans-serif; font-weight: 700; display: block; }
+  .about-skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+  .skill-tag {
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 500;
+    border: 1px solid var(--border);
+    color: var(--muted); transition: all .2s;
+  }
+  .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ACCOUNTS GRID */
+  .accounts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px; max-width: 1200px; margin: 0 auto;
+  }
+  .account-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px;
+    transition: all .25s;
+    position: relative; overflow: hidden;
+  }
+  .account-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0; transition: opacity .25s;
+  }
+  .account-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .account-card:hover::before { opacity: 1; }
+  .account-card-header {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; margin-bottom: 16px;
+  }
+  .account-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .account-status {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
+    padding: 4px 10px; border-radius: 12px;
+  }
+  .status-active {
+    background: rgba(0,214,143,0.1); color: var(--green);
+  }
+  .status-active::before {
+    content: '';
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+  .account-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700; margin-bottom: 4px;
+    color: var(--text);
+  }
+  .account-biz { font-size: 12px; color: var(--muted); }
+  .account-meta {
+    display: flex; gap: 16px; margin-top: 16px;
+    padding-top: 16px; border-top: 1px solid var(--border);
+  }
+  .account-meta-item { font-size: 11px; color: var(--muted2); }
+  .account-meta-item strong { display: block; font-size: 13px; color: var(--muted); font-weight: 500; }
+
+  /* SERVICES */
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; max-width: 1100px; margin: 0 auto;
+    border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+  }
+  .service-card {
+    background: var(--card); padding: 36px 32px;
+    transition: background .2s;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .service-card:hover { background: #181E2D; }
+  .service-card:nth-child(3n) { border-right: none; }
+  .service-card:nth-last-child(-n+3) { border-bottom: none; }
+  .service-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; color: var(--accent);
+    font-weight: 700; letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+  .service-icon { font-size: 28px; margin-bottom: 16px; }
+  .service-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 700; margin-bottom: 10px;
+    color: var(--text);
+  }
+  .service-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* CLIENTS / WORK */
+  .clients-section { background: var(--surface); }
+  .clients-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px; max-width: 1200px; margin: 0 auto;
+  }
+  .client-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 28px;
+    transition: all .25s; cursor: default;
+  }
+  .client-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  }
+  .client-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+  }
+  .client-logo {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .client-name {
+    font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700;
+  }
+  .client-category { font-size: 12px; color: var(--muted); }
+  .client-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-bottom: 18px;
+  }
+  .client-stat {
+    background: var(--surface); border-radius: 10px; padding: 12px 14px;
+  }
+  .client-stat-val {
+    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700;
+    color: var(--text);
+  }
+  .client-stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .client-link {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--muted);
+    text-decoration: none; transition: color .2s;
+    border-top: 1px solid var(--border); padding-top: 14px;
+  }
+  .client-link:hover { color: var(--accent); }
+  .client-link svg { width: 12px; height: 12px; }
+
+  /* NEONBOARDS FEATURE */
+  .neon-feature {
+    background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(123,97,255,0.05));
+    border: 1px solid rgba(0,229,255,0.15);
+    border-radius: 24px; padding: 40px;
+    max-width: 1200px; margin: 0 auto 20px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    align-items: center;
+  }
+  .neon-badge {
+    display: inline-block; padding: 4px 12px; border-radius: 12px;
+    background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.25);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 16px;
+  }
+  .neon-title {
+    font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800;
+    letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px;
+  }
+  .neon-title span {
+    background: linear-gradient(135deg, #00E5FF, #7B61FF);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .neon-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+  .neon-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .neon-tag {
+    padding: 5px 12px; border-radius: 8px;
+    font-size: 12px; font-weight: 500;
+    background: rgba(255,255,255,0.05);
+    color: var(--muted);
+  }
+  .neon-visual {
+    background: var(--card); border-radius: 16px;
+    border: 1px solid var(--border); padding: 32px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .neon-stat {
+    background: var(--surface); border-radius: 12px; padding: 16px;
+    text-align: center;
+  }
+  .neon-stat-val {
+    font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800;
+    color: var(--accent);
+  }
+  .neon-stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* RESULTS STRIP */
+  .results-strip {
+    background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(123,97,255,0.06));
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 48px;
+  }
+  .results-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2px; max-width: 1000px; margin: 0 auto;
+  }
+  .result-item {
+    text-align: center; padding: 24px;
+    border-right: 1px solid var(--border);
+  }
+  .result-item:last-child { border-right: none; }
+  .result-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px; font-weight: 800; letter-spacing: -2px;
+    line-height: 1;
+  }
+  .result-num.c-accent { color: var(--accent); }
+  .result-num.c-purple { color: var(--accent2); }
+  .result-num.c-green { color: var(--green); }
+  .result-num.c-amber { color: var(--amber); }
+  .result-unit {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 700;
+    color: inherit;
+  }
+  .result-label { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+  /* FOOTER */
+  footer {
+    padding: 60px 48px 40px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 20px; color: var(--text);
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a {
+    font-size: 13px; color: var(--muted);
+    text-decoration: none; transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--text); }
+  .footer-copy { font-size: 12px; color: var(--muted2); }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links, .nav-cta { display: none; }
+    section { padding: 70px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-stats { gap: 28px; flex-wrap: wrap; }
+    .about-inner { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr 1fr; }
+    .neon-feature { grid-template-columns: 1fr; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">S<span>.</span>A<span>.</span>Bar</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+  </div>
+  <a href="mailto:syedabdulbar@gmail.com" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Available for New Projects</div>
+    <h1>
+      <span class="name-line">Syed Abdul Bar</span>
+      <span class="accent-line">Digital Marketer</span>
+    </h1>
+    <p class="hero-sub">Performance marketing specialist focused on Meta Ads — scaling e-commerce brands through data-driven campaigns, creative testing, and profitable ROAS.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">13<span>+</span></div>
+        <div class="hero-stat-label">Active Ad Accounts</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">5.8<span>x</span></div>
+        <div class="hero-stat-label">Avg. ROAS Delivered</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">PKR</div>
+        <div class="hero-stat-label">Multi-market Campaigns</div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary">View My Work →</a>
+      <a href="https://www.instagram.com/fake._.g.u.y/" target="_blank" class="btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS STRIP -->
+<div class="results-strip reveal">
+  <div class="results-grid">
+    <div class="result-item">
+      <div class="result-num c-accent">96<span class="result-unit">+</span></div>
+      <div class="result-label">Monthly Purchases (1 Campaign)</div>
+    </div>
+    <div class="result-item">
+      <div class="result-num c-purple">5.83<span class="result-unit">x</span></div>
+      <div class="result-label">Purchase ROAS (Gyne Care)</div>
+    </div>
+    <div class="result-item">
+      <div class="result-num c-green">13<span class="result-unit">+</span></div>
+      <div class="result-label">Brands Managed</div>
+    </div>
+    <div class="result-item">
+      <div class="result-num c-amber">494<span class="result-unit">₨</span></div>
+      <div class="result-label">Cost Per Purchase</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-avatar-wrap reveal">
+      <div class="about-avatar">SAB</div>
+      <div class="about-tag">
+        <strong>5.83x</strong>
+        Best ROAS Achieved
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.1s">
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">Turning Ad Spend<br>Into Revenue</h2>
+      <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:24px">
+        I'm a performance-focused digital marketer based in Pakistan, specialising in Meta Ads for e-commerce and D2C brands. I manage campaigns across diverse verticals — cosmetics, healthcare, lifestyle, and neon décor — with a sharp focus on profitable scaling, creative testing, and conversion funnel optimisation.
+      </p>
+      <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:32px">
+        With 13+ active ad accounts under management, I bring data-backed decisions and systematic A/B testing to every client — reducing CPR, increasing purchase volume, and protecting ROAS as budgets scale.
+      </p>
+      <div class="about-skills">
+        <span class="skill-tag">Meta Ads</span>
+        <span class="skill-tag">CBO Campaigns</span>
+        <span class="skill-tag">Creative Testing</span>
+        <span class="skill-tag">ROAS Optimisation</span>
+        <span class="skill-tag">Audience Strategy</span>
+        <span class="skill-tag">E-commerce</span>
+        <span class="skill-tag">Lookalike Audiences</span>
+        <span class="skill-tag">Retargeting</span>
+        <span class="skill-tag">Budget Scaling</span>
+        <span class="skill-tag">Pixel Setup</span>
+        <span class="skill-tag">Shopify</span>
+        <span class="skill-tag">Conversion Funnels</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background: var(--surface);">
+  <div style="max-width:1100px;margin:0 auto">
+    <p class="section-label reveal">What I Do</p>
+    <h2 class="section-title reveal">Core Services</h2>
+    <p class="section-desc reveal">End-to-end Meta Ads management — from strategy and creative to optimisation and scaling.</p>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-icon">🎯</div>
+        <div class="service-title">Campaign Strategy</div>
+        <div class="service-desc">Full-funnel Meta campaign architecture — CBO & ABO structure, audience segmentation, and objective alignment for maximum purchase volume.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-icon">🧪</div>
+        <div class="service-title">Creative Testing</div>
+        <div class="service-desc">Systematic A/B testing of ad creatives, copy variations, and formats to identify winning combinations before scaling budget.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-icon">📈</div>
+        <div class="service-title">Budget Scaling</div>
+        <div class="service-desc">Controlled, data-driven budget scaling — 20–30% increments on proven campaigns to grow purchases without disrupting the learning phase.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-icon">🔁</div>
+        <div class="service-title">Retargeting Campaigns</div>
+        <div class="service-desc">High-conversion retargeting for ATC abandoners, checkout abandoners, and past purchasers — driving sales at 40–60% lower CPR.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <div class="service-icon">👥</div>
+        <div class="service-title">Audience Building</div>
+        <div class="service-desc">Lookalike audiences from pixel purchase data, custom audiences from CRM lists, and interest-based targeting for cold traffic acquisition.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <div class="service-icon">📊</div>
+        <div class="service-title">Analytics & Reporting</div>
+        <div class="service-desc">Weekly performance reports covering ROAS, CPR, frequency, funnel drop-off, and actionable next steps — full transparency on every rupee spent.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED WORK -->
+<section id="work" class="clients-section">
+  <div style="max-width:1200px;margin:0 auto">
+    <p class="section-label reveal">Featured Work</p>
+    <h2 class="section-title reveal">Client Highlights</h2>
+    <p class="section-desc reveal">Selected campaigns and brands I've grown through performance marketing.</p>
+
+    <!-- GLEN FEATURE CARD -->
+    <div class="neon-feature reveal">
+      <div>
+        <div class="neon-badge">⚡ Featured Client</div>
+        <h3 class="neon-title">Glen <span>Private Label</span> Service</h3>
+        <p class="neon-desc">Pakistan's leading cosmetics private label manufacturer with a 40-year legacy and 66K+ Instagram followers. Managing Meta performance campaigns to drive brand awareness, lead generation, and direct inquiries for their manufacturing and packaging services — targeting entrepreneurs and beauty brand founders across Pakistan, UAE, UK, and beyond.</p>
+        <div class="neon-tags">
+          <span class="neon-tag">Cosmetics Manufacturing</span>
+          <span class="neon-tag">Private Label</span>
+          <span class="neon-tag">PCSIR & DRAP Certified</span>
+          <span class="neon-tag">B2B & D2C</span>
+          <span class="neon-tag">800+ Brands Served</span>
+          <span class="neon-tag">Meta Ads</span>
+        </div>
+        <a href="https://www.instagram.com/glenprivatelabelservice/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;color:var(--accent);text-decoration:none;border:1px solid rgba(0,229,255,0.3);padding:8px 16px;border-radius:8px;transition:all .2s" onmouseover="this.style.background='rgba(0,229,255,0.08)'" onmouseout="this.style.background='transparent'">
+          View on Instagram
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
+      </div>
+      <div class="neon-visual">
+        <div class="neon-stat">
+          <div class="neon-stat-val">66K<span style="font-size:14px">+</span></div>
+          <div class="neon-stat-label">Instagram Followers</div>
+        </div>
+        <div class="neon-stat">
+          <div class="neon-stat-val">40<span style="font-size:14px">yrs</span></div>
+          <div class="neon-stat-label">Legacy in Cosmetics</div>
+        </div>
+        <div class="neon-stat">
+          <div class="neon-stat-val">800<span style="font-size:14px">+</span></div>
+          <div class="neon-stat-label">Brands Served</div>
+        </div>
+        <div class="neon-stat">
+          <div class="neon-stat-val">6<span style="font-size:14px"> mkts</span></div>
+          <div class="neon-stat-label">Global Markets</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENT CARDS -->
+    <div class="clients-grid">
+
+      <div class="client-card reveal">
+        <div class="client-header">
+          <div class="client-logo" style="background:rgba(255,107,107,0.12);color:#FF6B6B">GC</div>
+          <div>
+            <div class="client-name">Gyne Care</div>
+            <div class="client-category">Healthcare · Multi-purpose Oil</div>
+          </div>
+        </div>
+        <div class="client-stats">
+          <div class="client-stat">
+            <div class="client-stat-val" style="color:var(--green)">5.83x</div>
+            <div class="client-stat-label">Purchase ROAS</div>
+          </div>
+          <div class="client-stat">
+            <div class="client-stat-val">PKR 494</div>
+            <div class="client-stat-label">Cost Per Purchase</div>
+          </div>
+          <div class="client-stat">
+            <div class="client-stat-val">96</div>
+            <div class="client-stat-label">Monthly Purchases</div>
+          </div>
+          <div class="client-stat">
+            <div class="client-stat-val">PKR 47K</div>
+            <div class="client-stat-label">Monthly Spend</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6">CBO campaign with creative testing, audience consolidation, and controlled scaling. Achieved 5.83x ROAS on PKR 3,000/day budget.</div>
+      </div>
+
+      <div class="client-card reveal" style="transition-delay:.1s">
+        <div class="client-header">
+          <div class="client-logo" style="background:rgba(255,105,180,0.12);color:#FF69B4">EC</div>
+          <div>
+            <div class="client-name">Ecrin Cosmetics</div>
+            <div class="client-category">Beauty & Cosmetics · D2C</div>
+          </div>
+        </div>
+        <div class="client-stats">
+          <div class="client-stat">
+            <div class="client-stat-val" style="color:var(--accent)">Multi-Mkt</div>
+            <div class="client-stat-label">Market Reach</div>
+          </div>
+          <div class="client-stat">
+            <div class="client-stat-val">3 A/Cs</div>
+            <div class="client-stat-label">Ad Accounts</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6">Multi-account management across PKR, ARS, and USD markets. Scaling beauty campaigns with creative-led strategy and conversion optimisation.</div>
+      </div>
+
+      <div class="client-card reveal" style="transition-delay:.2s">
+        <div class="client-header">
+          <div class="client-logo" style="background:rgba(0,214,143,0.12);color:#00D68F">AO</div>
+          <div>
+            <div class="client-name">Aylin Organic</div>
+            <div class="client-category">Organic Products · Lifestyle</div>
+          </div>
+        </div>
+        <div class="client-stats">
+          <div class="client-stat">
+            <div class="client-stat-val" style="color:var(--green)">Organic</div>
+            <div class="client-stat-label">Niche</div>
+          </div>
+          <div class="client-stat">
+            <div class="client-stat-val">PKR</div>
+            <div class="client-stat-label">Market</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6">Performance campaigns for organic lifestyle products. Audience testing and funnel-optimised Meta ads driving product discovery and purchase conversion.</div>
+      </div>
+
+      <div class="client-card reveal" style="transition-delay:.3s">
+        <div class="client-header">
+          <div class="client-logo" style="background:rgba(255,181,71,0.12);color:#FFB547">GC</div>
+          <div>
+            <div class="client-name">Gentlemen Charm</div>
+            <div class="client-category">Men's Lifestyle · Grooming</div>
+          </div>
+        </div>
+        <div class="client-stats">
+          <div class="client-stat">
+            <div class="client-stat-val" style="color:var(--amber)">Men's</div>
+            <div class="client-stat-label">Target Audience</div>
+          </div>
+          <div class="client-stat">
+            <div class="client-stat-val">PKR</div>
+            <div class="client-stat-label">Market</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6">Men's grooming and lifestyle brand. Creative-first Meta campaigns with strong hooks, product demonstrations, and interest-based cold traffic targeting.</div>
+      </div>
+
+      <div class="client-card reveal" style="transition-delay:.4s">
+        <div class="client-header">
+          <div class="client-logo" style="background:rgba(0,229,255,0.12);color:#00E5FF">NB</div>
+          <div>
+            <div class="client-name">NeonBoards.pk</div>
+            <div class="client-category">Custom LED Neon Signs · Décor</div>
+          </div>
+        </div>
+        <div class="client-stats">
+          <div class="client-stat">
+            <div class="client-stat-val" style="color:var(--accent)">E-COM</div>
+            <div class="client-stat-label">Business Model</div>
+          </div>
+          <div class="client-stat">
+            <div class="client-stat-val">🇵🇰 PK</div>
+            <div class="client-stat-label">Market</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6">Pakistan's custom LED neon signs, mirrors, and 3D lamp brand. Meta performance campaigns targeting weddings, events, and businesses nationwide.</div>
+        <a href="https://www.instagram.com/neonboards.pk/" target="_blank" class="client-link" style="margin-top:14px">
+          @neonboards.pk
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
+      </div>
+
+      <div class="client-card reveal" style="transition-delay:.5s">
+        <div class="client-header">
+          <div class="client-logo" style="background:rgba(123,97,255,0.12);color:#7B61FF">TS</div>
+          <div>
+            <div class="client-name">The Stationers</div>
+            <div class="client-category">Stationery & Office Supplies</div>
+          </div>
+        </div>
+        <div class="client-stats">
+          <div class="client-stat">
+            <div class="client-stat-val" style="color:var(--accent2)">B2C</div>
+            <div class="client-stat-label">Model</div>
+          </div>
+          <div class="client-stat">
+            <div class="client-stat-val">PKR</div>
+            <div class="client-stat-label">Market</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6">Stationery and office supply campaigns with catalog-based Meta ads, retargeting, and seasonal promotion strategy to drive repeat purchase behaviour.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">S<span>.</span>A<span>.</span>Bar</div>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/fake._.g.u.y/" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com" target="_blank">Facebook</a>
+    <a href="mailto:syedabdulbar@gmail.com">Email</a>
+  </div>
+  <div class="footer-copy">© 2026 Syed Abdul Bar · Digital Marketer · Pakistan</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
